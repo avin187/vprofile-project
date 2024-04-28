@@ -1,19 +1,13 @@
 FROM openjdk:11 AS BUILD_IMAGE
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends maven && \
-    rm -rf /var/lib/apt/lists/*
-
-WORKDIR /opt
+RUN apt-get update && apt-get install -y maven \
+    && apt-get clean
 
 RUN git clone https://github.com/devopshydclub/vprofile-project.git && \
     cd vprofile-project && \
-    git checkout docker && \
-    mvn install && \
-    cd .. && \
-    rm -rf vprofile-project
+    mvn install
 
-FROM tomcat:9.0.54-jdk11-openjdk-slim
+FROM tomcat:9-jre11
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 
