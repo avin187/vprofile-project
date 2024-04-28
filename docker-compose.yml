@@ -13,14 +13,14 @@ services:
       - MYSQL_ROOT_PASSWORD=vprodbpass
 
   vprocache01:
-    image: memcached:latest
+    image: memcached
     ports:
       - "11211:11211"
 
   vpromq01:
-    image: rabbitmq:latest
+    image: rabbitmq
     ports:
-      - "15672:15672"
+      - "5672:5672"
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
